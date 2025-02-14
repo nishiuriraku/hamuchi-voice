@@ -9,7 +9,7 @@
         <h1 class="text-h2 font-weight-bold">ハムチ🐹</h1>
       </div>
 
-      <v-row align="center" justify="center" class="mt-6 pb-6">
+      <v-row align="center" justify="center" class="mt-6 pb-6 px-2">
         <v-col
           v-for="{ text, fileName } in audios"
           :key="fileName"
@@ -35,7 +35,7 @@
         :min="0"
         :step="1"
         thumb-label
-        class="mt-6"
+        class="mt-6 px-2"
       />
     </v-responsive>
   </v-container>
