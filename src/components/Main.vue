@@ -24,6 +24,7 @@
             class="w-100"
             @click="play(fileName)"
           />
+          <audio :src="`${fileName}.mp3`" />
         </v-col>
       </v-row>
 
