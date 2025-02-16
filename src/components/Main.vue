@@ -37,6 +37,13 @@
         thumb-label
         class="mt-6 px-2"
       />
+
+      <v-select
+        label="再生速度"
+        v-model="playbackRate"
+        :items="playbackRateItems"
+        variant="outlined"
+      ></v-select>
     </v-responsive>
   </v-container>
 </template>
@@ -48,6 +55,7 @@ const play = (name: string) => {
   const audio = document.createElement('audio');
   audio.src = `${name}.mp3`;
   audio.volume = volume.value / 100;
+  audio.playbackRate = playbackRate.value;
   audio.play();
 };
 
@@ -70,5 +78,17 @@ const audios = [
   { text: '感性変‼️', fileName: '感性変' },
   { text: '結婚結婚結婚‼️', fileName: '結婚結婚結婚' },
   { text: 'ﾊｲﾊｲ沐浴', fileName: '沐浴' },
+];
+
+const playbackRate = ref(1);
+const playbackRateItems = [
+  { title: '0.25', value: 0.25 },
+  { title: '0.5', value: 0.5 },
+  { title: '0.75', value: 0.75 },
+  { title: '標準', value: 1 },
+  { title: '1.25', value: 1.25 },
+  { title: '1.5', value: 1.5 },
+  { title: '1.725', value: 1.75 },
+  { title: '2', value: 2 },
 ];
 </script>
