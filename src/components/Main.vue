@@ -88,7 +88,7 @@ const playbackRateItems = [
   { title: '標準', value: 1 },
   { title: '1.25', value: 1.25 },
   { title: '1.5', value: 1.5 },
-  { title: '1.725', value: 1.75 },
+  { title: '1.75', value: 1.75 },
   { title: '2', value: 2 },
 ];
 </script>
