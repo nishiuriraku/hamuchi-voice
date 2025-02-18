@@ -57,10 +57,7 @@ const play = (name: string) => {
 const audios = [
   { text: 'ﾊﾑﾁでｽ‼️', fileName: 'はむちです' },
   { text: 'ﾊﾑ、ｽﾀｰ', fileName: 'はむすたー、へっへっへっへっ' },
-  {
-    text: 'ﾊﾑ、ｽﾀｰ (x10)',
-    fileName: 'はむすたー、へっへっへっへっ（x10）',
-  },
+  { text: 'ﾊﾑ、ｽﾀｰ (x10)', fileName: 'はむすたー、へっへっへっへっ（x10）' },
   { text: '🖐️へらに^_^す', fileName: 'へらにす' },
   { text: 'あと5分あれば', fileName: 'あと5分あれば' },
   { text: 'ｳﾏﾏﾁﾏﾁﾏ', fileName: 'ｳﾏﾏﾁﾏﾁﾏ' },
@@ -68,11 +65,13 @@ const audios = [
   { text: 'ﾁｬｲﾁｬｲﾁｬｲ', fileName: 'ﾁｬｲﾁｬｲﾁｬｲ' },
   { text: 'ｯﾀｸ…ｼｬｱﾈｪﾅｧ……', fileName: 'ったく ' },
   { text: 'ﾊﾞﾁﾝ', fileName: 'ばちん' },
-
   { text: 'ﾏﾂｷﾁ‼️', fileName: 'ﾏﾂｷﾁ' },
   { text: '感性変‼️', fileName: '感性変' },
+  { text: 'ｳﾙﾁｪ‼️', fileName: 'ｳﾙﾁｪｴ' },
   { text: '結婚結婚結婚‼️', fileName: '結婚結婚結婚' },
   { text: 'ﾊｲﾊｲ沐浴', fileName: '沐浴' },
+  { text: 'ｼﾈﾄﾞｽ', fileName: 'ｼﾈﾄﾞｽ' },
+  { text: 'ﾜﾀﾞﾜﾀﾞﾜﾀﾞﾜﾀﾞ', fileName: 'ﾜﾀﾞﾜﾀﾞﾜﾀﾞﾜﾀﾞ' },
 ];
 
 const playbackRate = ref(1);
