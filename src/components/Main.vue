@@ -29,6 +29,7 @@
       </v-row>
 
       <v-slider
+        label="音量"
         v-model="volume"
         color="orange"
         :max="100"
