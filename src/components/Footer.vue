@@ -10,5 +10,12 @@
     >
       Xにシェアする
     </v-btn>
+
+    <v-btn
+      href="https://github.com/nishiuriraku/hamuchi-voice"
+      target="_blank"
+      icon="mdi-github"
+      variant="text"
+    />
   </v-footer>
 </template>
