@@ -1,13 +1,7 @@
 <template>
   <v-container>
     <v-responsive class="align-centerfill-height mx-auto" max-width="900">
-      <v-img class="mb-4" height="150" src="@/assets/500.png" />
-
-      <div class="text-center">
-        <div class="text-body-2 font-weight-light mb-n1">サンプラー</div>
-
-        <h1 class="text-h2 font-weight-bold">ハムチ🐹</h1>
-      </div>
+      <Header />
 
       <v-row align="center" justify="center" class="mt-6 pb-6 px-2">
         <v-col
