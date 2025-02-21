@@ -84,5 +84,7 @@ const playbackRateItems = [
   { title: '1.5', value: 1.5 },
   { title: '1.75', value: 1.75 },
   { title: '2', value: 2 },
+  { title: '10', value: 10 },
+  { title: '15', value: 15 },
 ];
 </script>
