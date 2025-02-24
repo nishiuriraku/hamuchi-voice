@@ -46,12 +46,30 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 const volume = ref(50);
-const play = (name: string) => {
-  const audio = document.createElement('audio');
-  audio.src = `${name}.mp3`;
-  audio.volume = volume.value / 100;
-  audio.playbackRate = playbackRate.value;
-  audio.play();
+
+const audioCtx = new AudioContext();
+
+/** 音源再生のために準備を行う */
+const prepareAudioBufferNode = (audioBuffer: AudioBuffer) => {
+  const gainNode = audioCtx.createGain();
+  const audioBufferNode = audioCtx.createBufferSource();
+  audioBufferNode.buffer = audioBuffer;
+  audioBufferNode.connect(gainNode).connect(audioCtx.destination);
+  gainNode.gain.value = volume.value / 100;
+  audioBufferNode.playbackRate.value = playbackRate.value;
+  return audioBufferNode;
+};
+
+const play = async (name: string) => {
+  // fetch で sound.mp3 ファイルをダウンロードして ArrayBuffer を取得
+  const response = await fetch(`${name}.mp3`);
+  const responseBuffer = await response.arrayBuffer();
+
+  // ArrayBuffer をデコードして AudioBuffer オブジェクトを取得
+  const audioBuffer = await audioCtx.decodeAudioData(responseBuffer);
+  const audioBufferNode = prepareAudioBufferNode(audioBuffer);
+  // オーディオを再生
+  audioBufferNode.start(0);
 };
 
 const audios = [
