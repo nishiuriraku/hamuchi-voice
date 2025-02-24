@@ -12,8 +12,10 @@
     "gen-meta": "npm run genMeta.ts"
   },
   "dependencies": {
+    "@capacitor/android": "^7.0.1",
     "@capacitor/cli": "^7.0.1",
     "@capacitor/core": "^7.0.1",
+    "@capacitor/ios": "^7.0.1",
     "@mdi/font": "7.4.47",
     "roboto-fontface": "*",
     "vue": "^3.4.31",
