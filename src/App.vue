@@ -7,4 +7,8 @@
   </v-app>
 </template>
 
-<style lang="css"></style>
+<style lang="css">
+* {
+  user-select: none;
+}
+</style>
