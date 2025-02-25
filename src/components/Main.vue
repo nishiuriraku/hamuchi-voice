@@ -38,7 +38,7 @@
         v-model="playbackRate"
         :items="playbackRateItems"
         variant="outlined"
-      ></v-select>
+      />
     </v-responsive>
   </v-container>
 </template>

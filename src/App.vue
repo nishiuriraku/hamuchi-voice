@@ -6,3 +6,10 @@
     <Footer />
   </v-app>
 </template>
+
+<style lang="css">
+html,
+css {
+  touch-action: none;
+}
+</style>
