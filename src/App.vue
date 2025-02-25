@@ -7,9 +7,4 @@
   </v-app>
 </template>
 
-<style lang="css">
-html,
-css {
-  touch-action: none;
-}
-</style>
+<style lang="css"></style>
