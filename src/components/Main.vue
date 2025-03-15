@@ -90,6 +90,7 @@ const audios = [
   { text: 'ﾊｲﾊｲ沐浴', fileName: '沐浴' },
   { text: 'ｼﾈﾄﾞｽ', fileName: 'ｼﾈﾄﾞｽ' },
   { text: 'ﾜﾀﾞﾜﾀﾞﾜﾀﾞﾜﾀﾞ', fileName: 'ﾜﾀﾞﾜﾀﾞﾜﾀﾞﾜﾀﾞ' },
+  { text: 'サイテー‼️ウンチ‼️', fileName: 'サイテー！ウンチ！' },
 ];
 
 const playbackRate = ref(1);
