@@ -78,6 +78,7 @@ const audios = [
   { text: 'ﾊﾑ、ｽﾀｰ (x10)', fileName: 'はむすたー、へっへっへっへっ（x10）' },
   { text: '🖐️へらに^_^す', fileName: 'へらにす' },
   { text: 'あと5分あれば', fileName: 'あと5分あれば' },
+  { text: 'ｳﾏﾏﾁﾏﾁﾏ(short)', fileName: 'ｳﾏﾏﾁﾏﾁﾏ(short)' },
   { text: 'ｳﾏﾏﾁﾏﾁﾏ', fileName: 'ｳﾏﾏﾁﾏﾁﾏ' },
   { text: 'ｻｽ理', fileName: 'ｻｽ理' },
   { text: 'ﾁｬｲﾁｬｲﾁｬｲ', fileName: 'ﾁｬｲﾁｬｲﾁｬｲ' },
