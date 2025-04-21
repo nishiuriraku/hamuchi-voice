@@ -1,5 +1,5 @@
 <template>
-  <v-img class="mb-4" height="150" src="/500.png" />
+  <v-img class="mb-4" height="150" src="/600.png" />
 
   <div class="text-center">
     <div class="text-body-2 font-weight-light mb-n1">サンプラー</div>
