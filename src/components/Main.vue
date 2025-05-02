@@ -143,6 +143,21 @@ const audios = [
     { text: 'ｼﾈﾄﾞｽ', fileName: 'ｼﾈﾄﾞｽ' },
     { text: 'ﾜﾀﾞﾜﾀﾞﾜﾀﾞﾜﾀﾞ', fileName: 'ﾜﾀﾞﾜﾀﾞﾜﾀﾞﾜﾀﾞ' },
     { text: 'ｻｲﾃｰ‼️ｳﾝﾁ‼️', fileName: 'サイテー！ウンチ！' },
+    { text: 'ｱﾁ‼️', fileName: 'ｱﾁ' },
+    { text: 'ありゃとありゃと', fileName: 'ありゃとありゃと' },
+    { text: 'ﾊﾞﾊﾞﾝﾁ‼️', fileName: 'ﾊﾞﾊﾞﾝﾁ' },
+    { text: '了解', fileName: '了解' },
+    { text: 'ありがとっ', fileName: 'ありがとっ' },
+  ],
+  [
+    { text: 'ちょうど終わるとこ', fileName: 'ちょうど終わるとこ' },
+    { text: 'ｼｬﾗｸｾｪ‼️', fileName: 'ｼｬﾗｸｾｪ' },
+    { text: '涙の味もしないや', fileName: '涙の味もしないや' },
+    { text: 'ボケナス', fileName: 'ボケナス' },
+    { text: '次はシバきます', fileName: '次はシバきます' },
+    { text: 'ﾔﾍﾞ‼️', fileName: 'ﾔﾍﾞ' },
+    { text: '光あﾝねﾝ', fileName: '光あﾝねﾝ' },
+    { text: '半返しするねー！', fileName: '半返しするねー！' },
   ],
 ];
 
