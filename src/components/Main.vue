@@ -112,9 +112,7 @@ onMounted(() => {
   loading.value = true;
   getAudioBuffer().then((e) => {
     if (e) audioResponses.value = e;
-    sleep(1000).then(() => {
-      loading.value = false;
-    });
+    loading.value = false;
   });
 });
 
@@ -197,7 +195,9 @@ const plugins = [new Pagination({ type: 'bullet' })];
   transition: opacity 0.7s cubic-bezier(0, 1, 0, 1);
 }
 
-.fade-enter-from,
+.fade-enter-from {
+  opacity: 1;
+}
 .fade-leave-to {
   opacity: 0;
 }
