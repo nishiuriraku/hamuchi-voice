@@ -1,10 +1,13 @@
 <template>
   <div class="loading-container">
-    <img src="/hamu.webp" class="rotation" width="100px" height="100px" />
+    <div>
+      <img src="/hamu.webp" class="rotation" width="100px" height="100px" />
+      <p>なうろーでぃんぐ</p>
+    </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .loading-container {
   position: fixed;
   top: 0;
@@ -18,6 +21,8 @@
   background-color: #ffe3f6;
 
   z-index: 1000;
+
+  font-family: 'Cherry Bomb One', sans-serif;
 }
 .rotation {
   animation: 3s linear infinite rotation;

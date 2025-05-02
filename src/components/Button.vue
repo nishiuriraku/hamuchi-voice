@@ -1,16 +1,14 @@
 <template>
-  <div class="custom">
-    <button
-      ref="button"
-      @click="
-        randomise();
-        $emit('click');
-      "
-      :style="buttonColorStyle"
-    >
-      <span>{{ props.text }}</span>
-    </button>
-  </div>
+  <button
+    ref="button"
+    @click="
+      randomise();
+      $emit('click');
+    "
+    :style="buttonColorStyle"
+  >
+    {{ props.text }}
+  </button>
 </template>
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
