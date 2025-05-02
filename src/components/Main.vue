@@ -3,29 +3,41 @@
     <v-responsive class="align-centerfill-height mx-auto" max-width="900">
       <Header />
 
-      <v-row align="center" justify="center" class="mt-6 pb-6 px-2">
-        <v-col
-          v-for="{ text, fileName } in audios"
-          :key="fileName"
-          cols="6"
-          sm="4"
+      <div class="mb-10">
+        <Flicking
+          :options="{ align: 'prev', circular: true }"
+          :plugins="plugins"
         >
-          <v-btn
-            :text="text"
-            color="light-blue-lighten-5"
-            rounded="lg"
-            size="x-large"
+          <div
+            v-for="(group, pageIndex) in audios"
+            :key="'group' + pageIndex"
             class="w-100"
-            @click="play(fileName)"
-          />
-          <audio :src="`${fileName}.mp3`" />
-        </v-col>
-      </v-row>
+          >
+            <v-row align="center" justify="center" class="mt-6 pb-6 px-2">
+              <v-col
+                cols="6"
+                v-for="({ text, fileName }, audioIndex) in group"
+                :key="fileName"
+              >
+                <Button
+                  :text="text"
+                  @click="play(audioIndex, pageIndex)"
+                  class="w-100"
+                />
+                <audio :src="`${fileName}.mp3`" />
+              </v-col>
+            </v-row>
+          </div>
+          <template #viewport>
+            <div class="flicking-pagination"></div>
+          </template>
+        </Flicking>
+      </div>
 
       <v-slider
         label="音量"
         v-model="volume"
-        color="orange"
+        color="primary"
         :max="100"
         :min="0"
         :step="1"
@@ -39,12 +51,16 @@
         :items="playbackRateItems"
         variant="outlined"
       />
+
+      <Transition name="fade">
+        <Loading v-if="loading" />
+      </Transition>
     </v-responsive>
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 const volume = ref(50);
 
 const audioCtx = new AudioContext();
@@ -60,38 +76,74 @@ const prepareAudioBufferNode = (audioBuffer: AudioBuffer) => {
   return audioBufferNode;
 };
 
-const play = async (name: string) => {
-  // fetch で sound.mp3 ファイルをダウンロードして ArrayBuffer を取得
-  const response = await fetch(`${name}.mp3`);
-  const responseBuffer = await response.arrayBuffer();
-
+const play = async (audioIndex: number, pageIndex: number) => {
+  const index = audioIndex + pageIndex * 8;
   // ArrayBuffer をデコードして AudioBuffer オブジェクトを取得
-  const audioBuffer = await audioCtx.decodeAudioData(responseBuffer);
+  const audioBuffer = audioResponses.value[index];
   const audioBufferNode = prepareAudioBufferNode(audioBuffer);
   // オーディオを再生
   audioBufferNode.start(0);
 };
 
+const sleep = (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+const loading = ref(false);
+const audioResponses = ref<AudioBuffer[]>([]);
+onMounted(() => {
+  const getAudioBuffer = async () => {
+    try {
+      const fetchsAudioBuffer: AudioBuffer[] = [];
+      for (const audio of audios) {
+        for (const { fileName } of audio) {
+          const response = await fetch(`${fileName}.mp3`);
+          const responseBuffer = await response.arrayBuffer();
+          const audioBuffer = await audioCtx.decodeAudioData(responseBuffer);
+          fetchsAudioBuffer.push(audioBuffer);
+        }
+      }
+      return fetchsAudioBuffer;
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  loading.value = true;
+  getAudioBuffer().then((e) => {
+    if (e) audioResponses.value = e;
+    sleep(1000).then(() => {
+      loading.value = false;
+    });
+  });
+});
+
 const audios = [
-  { text: 'ﾊﾑﾁでｽ‼️', fileName: 'はむちです' },
-  { text: 'ﾊﾑ、ｽﾀｰ', fileName: 'はむすたー、へっへっへっへっ' },
-  { text: 'ﾊﾑ、ｽﾀｰ (x10)', fileName: 'はむすたー、へっへっへっへっ（x10）' },
-  { text: '🖐️へらに^_^す', fileName: 'へらにす' },
-  { text: 'あと5分あれば', fileName: 'あと5分あれば' },
-  { text: 'ｳﾏﾏﾁﾏﾁﾏ(short)', fileName: 'ｳﾏﾏﾁﾏﾁﾏ(short)' },
-  { text: 'ｳﾏﾏﾁﾏﾁﾏ', fileName: 'ｳﾏﾏﾁﾏﾁﾏ' },
-  { text: 'ｻｽ理', fileName: 'ｻｽ理' },
-  { text: 'ﾁｬｲﾁｬｲﾁｬｲ', fileName: 'ﾁｬｲﾁｬｲﾁｬｲ' },
-  { text: 'ｯﾀｸ…ｼｬｱﾈｪﾅｧ……', fileName: 'ったく ' },
-  { text: 'ﾊﾞﾁﾝ', fileName: 'ばちん' },
-  { text: 'ﾏﾂｷﾁ‼️', fileName: 'ﾏﾂｷﾁ' },
-  { text: '感性変‼️', fileName: '感性変' },
-  { text: 'ｳﾙﾁｪ‼️', fileName: 'ｳﾙﾁｪｴ' },
-  { text: '結婚結婚結婚‼️', fileName: '結婚結婚結婚' },
-  { text: 'ﾊｲﾊｲ沐浴', fileName: '沐浴' },
-  { text: 'ｼﾈﾄﾞｽ', fileName: 'ｼﾈﾄﾞｽ' },
-  { text: 'ﾜﾀﾞﾜﾀﾞﾜﾀﾞﾜﾀﾞ', fileName: 'ﾜﾀﾞﾜﾀﾞﾜﾀﾞﾜﾀﾞ' },
-  { text: 'サイテー‼️ウンチ‼️', fileName: 'サイテー！ウンチ！' },
+  [
+    { text: 'ﾊﾑﾁでｽ‼️', fileName: 'はむちです' },
+    { text: 'ﾊﾑ、ｽﾀｰ', fileName: 'はむすたー、へっへっへっへっ' },
+    { text: 'ﾊﾑ、ｽﾀｰ (x10)', fileName: 'はむすたー、へっへっへっへっ（x10）' },
+    { text: '🖐️へらに^_^す', fileName: 'へらにす' },
+    { text: 'あと5分あれば', fileName: 'あと5分あれば' },
+    { text: 'ｳﾏﾏﾁﾏﾁﾏ(short)', fileName: 'ｳﾏﾏﾁﾏﾁﾏ(short)' },
+    { text: 'ｳﾏﾏﾁﾏﾁﾏ', fileName: 'ｳﾏﾏﾁﾏﾁﾏ' },
+    { text: 'ｻｽ理', fileName: 'ｻｽ理' },
+  ],
+  [
+    { text: 'ﾁｬｲﾁｬｲﾁｬｲ', fileName: 'ﾁｬｲﾁｬｲﾁｬｲ' },
+    { text: 'ｯﾀｸ…ｼｬｱﾈｪﾅｧ……', fileName: 'ったく ' },
+    { text: 'ﾊﾞﾁﾝ', fileName: 'ばちん' },
+    { text: 'ﾏﾂｷﾁ‼️', fileName: 'ﾏﾂｷﾁ' },
+    { text: '感性変‼️', fileName: '感性変' },
+    { text: 'ｳﾙﾁｪ‼️', fileName: 'ｳﾙﾁｪｴ' },
+    { text: '結婚結婚結婚‼️', fileName: '結婚結婚結婚' },
+    { text: 'ﾊｲﾊｲ沐浴', fileName: '沐浴' },
+  ],
+  [
+    { text: 'ｼﾈﾄﾞｽ', fileName: 'ｼﾈﾄﾞｽ' },
+    { text: 'ﾜﾀﾞﾜﾀﾞﾜﾀﾞﾜﾀﾞ', fileName: 'ﾜﾀﾞﾜﾀﾞﾜﾀﾞﾜﾀﾞ' },
+    { text: 'ｻｲﾃｰ‼️ｳﾝﾁ‼️', fileName: 'サイテー！ウンチ！' },
+  ],
 ];
 
 const playbackRate = ref(1);
@@ -107,4 +159,35 @@ const playbackRateItems = [
   { title: '10', value: 10 },
   { title: '15', value: 15 },
 ];
+
+import { Pagination } from '@egjs/flicking-plugins';
+import '@egjs/flicking-plugins/dist/pagination.css';
+
+const plugins = [new Pagination({ type: 'bullet' })];
 </script>
+
+<style lang="scss">
+.flicking-pagination {
+  bottom: -10px;
+}
+.flicking-viewport {
+  overflow: visible !important;
+}
+.flicking-pagination-bullet-active {
+  background-color: #fd8798;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.7s cubic-bezier(0, 1, 0, 1);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.visible {
+  overflow: visible;
+}
+</style>
