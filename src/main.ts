@@ -5,16 +5,22 @@
  */
 
 // Plugins
-import { registerPlugins } from '@/plugins'
+import { registerPlugins } from '@/plugins';
 
 // Components
-import App from './App.vue'
+import App from './App.vue';
 
 // Composables
-import { createApp } from 'vue'
+import { createApp } from 'vue';
 
-const app = createApp(App)
+const app = createApp(App);
 
-registerPlugins(app)
+registerPlugins(app);
 
-app.mount('#app')
+import Flicking from '@egjs/vue3-flicking';
+import '@egjs/vue3-flicking/dist/flicking.css';
+// Or, if you have to support IE9
+import '@egjs/vue3-flicking/dist/flicking-inline.css';
+app.component('Flicking', Flicking);
+
+app.mount('#app');

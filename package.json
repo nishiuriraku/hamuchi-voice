@@ -4,7 +4,7 @@
   "type": "module",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -16,6 +16,8 @@
     "@capacitor/cli": "^7.0.1",
     "@capacitor/core": "^7.0.1",
     "@capacitor/ios": "^7.0.1",
+    "@egjs/flicking-plugins": "^4.7.1",
+    "@egjs/vue3-flicking": "^4.12.0",
     "@mdi/font": "7.4.47",
     "roboto-fontface": "*",
     "vue": "^3.4.31",

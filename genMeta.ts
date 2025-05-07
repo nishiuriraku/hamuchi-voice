@@ -1,6 +1,6 @@
 const title = 'ハムチサンプラー';
 const description = 'ハムチをｷﾞｭｯとまとめました';
-const url = 'https://hamuchi-voice.netlify.app/';
+const url = 'https://sampler.hamuchi.world/';
 const ogp = url + 'ogp.png';
 
 const meta = [

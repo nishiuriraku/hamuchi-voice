@@ -7,8 +7,12 @@
   </v-app>
 </template>
 
-<style lang="css">
+<style lang="scss">
 * {
   user-select: none;
+}
+html,
+body {
+  background-color: #fff6e0;
 }
 </style>
