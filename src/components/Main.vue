@@ -85,6 +85,10 @@ const play = async (audioIndex: number, pageIndex: number) => {
   const index = audioIndex + pageIndex * 8;
   // ArrayBuffer をデコードして AudioBuffer オブジェクトを取得
   const audioBuffer = audioResponses.value[index];
+  if (!audioBuffer) {
+    // AudioBufferがまだロードされていない場合は再生しない
+    return;
+  }
   const audioBufferNode = prepareAudioBufferNode(audioBuffer);
   // オーディオを再生
   audioBufferNode.start(0);
