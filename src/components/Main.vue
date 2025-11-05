@@ -5,7 +5,12 @@
 
       <div class="mb-10">
         <Flicking
-          :options="{ align: 'prev', circular: true }"
+          :options="{
+            align: 'prev',
+            circular: true,
+            preventClickOnDrag: false,
+            interruptable: true,
+          }"
           :plugins="plugins"
         >
           <div
@@ -207,6 +212,12 @@ const plugins = [new Pagination({ type: 'bullet' })];
 }
 .flicking-pagination-bullet-active {
   background-color: #fd8798;
+}
+.flicking-panel {
+  pointer-events: auto;
+}
+.flicking-panel > * {
+  pointer-events: auto;
 }
 
 .fade-enter-active,
