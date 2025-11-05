@@ -157,6 +157,25 @@ const audios = [
     { text: '光あﾝねﾝ', fileName: '光あﾝねﾝ' },
     { text: '半返しするねー！', fileName: '半返しするねー！' },
   ],
+  [
+    { text: 'ほぁ', fileName: 'ほぁ' },
+    { text: 'ﾎﾟｲﾝﾎﾟｲﾝ', fileName: 'ﾎﾟｲﾝﾎﾟｲﾝ' },
+    { text: 'おはよおはよ', fileName: 'おはよおはよおはよ' },
+    { text: 'ﾅｲﾊﾞﾁ', fileName: 'ﾅｲﾊﾞﾁﾅﾊﾞﾁﾅﾊﾞﾊﾞﾁﾏ' },
+    { text: 'ﾎﾞﾍﾎﾞﾍﾎﾞﾍ', fileName: 'ﾎﾞﾍﾎﾞﾍﾎﾞﾍ' },
+    { text: 'ﾌﾟｽｯ', fileName: 'ﾌﾟｽｯ' },
+    { text: 'めろりーん', fileName: 'めろりーん' },
+    { text: 'しゃるどね', fileName: 'しゃるどねーしょーん' },
+  ],
+  [
+    { text: 'カーー', fileName: 'カーー' },
+    { text: 'ちゆ', fileName: 'ちゆ' },
+    { text: 'ウェ～', fileName: 'ウェ～' },
+    { text: 'んーーーまっ！', fileName: 'んーーーまっ！' },
+    { text: 'ﾍﾞﾍﾞﾝ', fileName: 'ﾍﾞﾍﾞﾝ' },
+    { text: 'ぶぇっ', fileName: 'ぶぇっ' },
+    { text: 'ｺｺｯ', fileName: 'ｺｺｯ' },
+  ],
 ];
 
 const playbackRate = ref(1);
