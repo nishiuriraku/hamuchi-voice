@@ -67,6 +67,8 @@ button {
   min-width: 100%;
 
   position: relative;
+  pointer-events: auto;
+  z-index: 1;
 
   &:hover,
   &:active,
