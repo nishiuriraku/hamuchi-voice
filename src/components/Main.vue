@@ -2,6 +2,48 @@
   <v-container>
     <v-responsive class="align-centerfill-height mx-auto" max-width="900">
       <Header />
+      <div class="mt-6 d-flex justify-center align-center">
+        <v-dialog max-width="500">
+          <template v-slot:activator="{ props: activatorProps }">
+            <v-btn v-bind="activatorProps" variant="text" color="primary">
+              ハムチ用語説明
+            </v-btn>
+          </template>
+
+          <template v-slot:default="{ isActive }">
+            <v-card color="#fff6e0" max-height="600">
+              <v-card-title class="text-h6 text-center opacity-80">
+                ハムチ用語説明
+              </v-card-title>
+              <v-card-item>
+                <div
+                  v-for="(
+                    { text, fileName, description }, audioIndex
+                  ) in audios[currentPageIndex]"
+                  :key="'group' + audioIndex"
+                >
+                  <v-card-title
+                    class="opacity-80 mb-2 d-flex align-center ga-2"
+                  >
+                    {{ text }}
+                    <v-btn
+                      variant="text"
+                      color="primary"
+                      icon="mdi-play"
+                      size="small"
+                      @click="playSampleAudio(fileName)"
+                    ></v-btn>
+                  </v-card-title>
+
+                  <v-card-text class="opacity-70 mb-6 text-pre-line">
+                    <p v-html="withLink(description)"></p>
+                  </v-card-text>
+                </div>
+              </v-card-item>
+            </v-card>
+          </template>
+        </v-dialog>
+      </div>
 
       <div class="mb-10">
         <Flicking
@@ -12,6 +54,7 @@
             interruptable: true,
           }"
           :plugins="plugins"
+          @changed="onPageChange"
         >
           <div
             v-for="(group, pageIndex) in audios"
@@ -29,7 +72,7 @@
                   @click="play(audioIndex, pageIndex)"
                   class="w-100"
                 />
-                <audio :src="`${fileName}.mp3`" />
+                <audio :id="fileName" :src="`${fileName}.mp3`" />
               </v-col>
             </v-row>
           </div>
@@ -66,7 +109,10 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import { audios } from '@/contents';
+
 const volume = ref(50);
+const currentPageIndex = ref(0);
 
 const audioCtx = new AudioContext();
 
@@ -125,67 +171,13 @@ onMounted(() => {
   });
 });
 
-const audios = [
-  [
-    { text: 'ﾊﾑﾁでｽ‼️', fileName: 'はむちです' },
-    { text: 'ﾊﾑ、ｽﾀｰ', fileName: 'はむすたー、へっへっへっへっ' },
-    { text: 'ﾊﾑ、ｽﾀｰ (x10)', fileName: 'はむすたー、へっへっへっへっ（x10）' },
-    { text: '🖐️へらに^_^す', fileName: 'へらにす' },
-    { text: 'あと5分あれば', fileName: 'あと5分あれば' },
-    { text: 'ｳﾏﾏﾁﾏﾁﾏ(short)', fileName: 'ｳﾏﾏﾁﾏﾁﾏ(short)' },
-    { text: 'ｳﾏﾏﾁﾏﾁﾏ', fileName: 'ｳﾏﾏﾁﾏﾁﾏ' },
-    { text: 'ｻｽ理', fileName: 'ｻｽ理' },
-  ],
-  [
-    { text: 'ﾁｬｲﾁｬｲﾁｬｲ', fileName: 'ﾁｬｲﾁｬｲﾁｬｲ' },
-    { text: 'ｯﾀｸ…ｼｬｱﾈｪﾅｧ……', fileName: 'ったく ' },
-    { text: 'ﾊﾞﾁﾝ', fileName: 'ばちん' },
-    { text: 'ﾏﾂｷﾁ‼️', fileName: 'ﾏﾂｷﾁ' },
-    { text: '感性変‼️', fileName: '感性変' },
-    { text: 'ｳﾙﾁｪ‼️', fileName: 'ｳﾙﾁｪｴ' },
-    { text: '結婚結婚結婚‼️', fileName: '結婚結婚結婚' },
-    { text: 'ﾊｲﾊｲ沐浴', fileName: '沐浴' },
-  ],
-  [
-    { text: 'ｼﾈﾄﾞｽ', fileName: 'ｼﾈﾄﾞｽ' },
-    { text: 'ﾜﾀﾞﾜﾀﾞﾜﾀﾞﾜﾀﾞ', fileName: 'ﾜﾀﾞﾜﾀﾞﾜﾀﾞﾜﾀﾞ' },
-    { text: 'ｻｲﾃｰ‼️ｳﾝﾁ‼️', fileName: 'サイテー！ウンチ！' },
-    { text: 'ｱﾁ‼️', fileName: 'ｱﾁ' },
-    { text: 'ありゃとありゃと', fileName: 'ありゃとありゃと' },
-    { text: 'ﾊﾞﾊﾞﾝﾁ‼️', fileName: 'ﾊﾞﾊﾞﾝﾁ' },
-    { text: '了解', fileName: '了解' },
-    { text: 'ありがとっ', fileName: 'ありがとっ' },
-  ],
-  [
-    { text: 'ちょうど終わるとこ', fileName: 'ちょうど終わるとこ' },
-    { text: 'ｼｬﾗｸｾｪ‼️', fileName: 'ｼｬﾗｸｾｪ' },
-    { text: '涙の味もしないや', fileName: '涙の味もしないや' },
-    { text: 'ボケナス', fileName: 'ボケナス' },
-    { text: '次はシバきます', fileName: '次はシバきます' },
-    { text: 'ﾔﾍﾞ‼️', fileName: 'ﾔﾍﾞ' },
-    { text: '光あﾝねﾝ', fileName: '光あﾝねﾝ' },
-    { text: '半返しするねー！', fileName: '半返しするねー！' },
-  ],
-  [
-    { text: 'ほぁ', fileName: 'ほぁ' },
-    { text: 'ﾎﾟｲﾝﾎﾟｲﾝ', fileName: 'ﾎﾟｲﾝﾎﾟｲﾝ' },
-    { text: 'おはよおはよ', fileName: 'おはよおはよおはよ' },
-    { text: 'ﾅｲﾊﾞﾁ', fileName: 'ﾅｲﾊﾞﾁﾅﾊﾞﾁﾅﾊﾞﾊﾞﾁﾏ' },
-    { text: 'ﾎﾞﾍﾎﾞﾍﾎﾞﾍ', fileName: 'ﾎﾞﾍﾎﾞﾍﾎﾞﾍ' },
-    { text: 'ﾌﾟｽｯ', fileName: 'ﾌﾟｽｯ' },
-    { text: 'めろりーん', fileName: 'めろりーん' },
-    { text: 'しゃるどね', fileName: 'しゃるどねーしょーん' },
-  ],
-  [
-    { text: 'カーー', fileName: 'カーー' },
-    { text: 'ちゆ', fileName: 'ちゆ' },
-    { text: 'ウェ～', fileName: 'ウェ～' },
-    { text: 'んーーーまっ！', fileName: 'んーーーまっ！' },
-    { text: 'ﾍﾞﾍﾞﾝ', fileName: 'ﾍﾞﾍﾞﾝ' },
-    { text: 'ぶぇっ', fileName: 'ぶぇっ' },
-    { text: 'ｺｺｯ', fileName: 'ｺｺｯ' },
-  ],
-];
+const playSampleAudio = (fileName: string) => {
+  const audio = document.getElementById(fileName) as HTMLAudioElement;
+  if (audio) {
+    audio.volume = volume.value / 100;
+    audio.play();
+  }
+};
 
 const playbackRate = ref(1);
 const playbackRateItems = [
@@ -201,10 +193,29 @@ const playbackRateItems = [
   { title: '15', value: 15 },
 ];
 
+import Flicking from '@egjs/vue3-flicking';
 import { Pagination } from '@egjs/flicking-plugins';
 import '@egjs/flicking-plugins/dist/pagination.css';
 
 const plugins = [new Pagination({ type: 'bullet' })];
+
+const onPageChange = (e: {
+  index: number;
+  panel: any;
+  prevIndex: number;
+  prevPanel: any;
+  isTrusted: boolean;
+  direction: string;
+}) => {
+  currentPageIndex.value = e.index;
+};
+
+const withLink = (text: string) => {
+  return text.replace(
+    /https?:\/\/([^\s]+)/g,
+    '<a href="$&" target="_blank">$1</a>'
+  );
+};
 </script>
 
 <style lang="scss">
