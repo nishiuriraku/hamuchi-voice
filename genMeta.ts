@@ -14,7 +14,7 @@ const meta = [
   { property: 'og:type', content: 'website' },
   { property: 'og:site_name', content: title },
   { property: 'og:locale', content: 'ja_JP' },
-  { name: 'twitter:card', content: 'summary' },
+  { name: 'twitter:card', content: 'summary_large_image' },
   { name: 'twitter:site', content: '@hamutima_86' },
   { name: 'twitter:creator', content: '@nishiuriraku' },
   { name: 'twitter:title', content: title },
