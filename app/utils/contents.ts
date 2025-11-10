@@ -1,4 +1,12 @@
-export const audios = [
+export interface AudioEntry {
+  text: string;
+  fileName: string;
+  description: string;
+}
+
+export type AudioGroups = AudioEntry[][];
+
+export const audios: AudioGroups = [
   [
     {
       text: 'ﾊﾑﾁでｽ‼️',
@@ -255,3 +263,4 @@ export const audios = [
     },
   ],
 ];
+

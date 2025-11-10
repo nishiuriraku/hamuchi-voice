@@ -1,7 +1,7 @@
 <template>
   <div class="loading-container">
     <div>
-      <img src="/hamu.webp" class="rotation" width="100px" height="100px" />
+      <img src="/hamu.webp" class="rotation" width="100" height="100" />
       <p>なうろーでぃんぐ</p>
     </div>
   </div>
@@ -17,11 +17,8 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-
   background-color: #ffe3f6;
-
   z-index: 1000;
-
   font-family: 'Cherry Bomb One', sans-serif;
 }
 .rotation {
@@ -37,3 +34,4 @@
   }
 }
 </style>
+

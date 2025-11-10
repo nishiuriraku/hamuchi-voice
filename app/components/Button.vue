@@ -10,8 +10,9 @@
     {{ props.text }}
   </button>
 </template>
+
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const props = defineProps({
   text: {
@@ -20,52 +21,46 @@ const props = defineProps({
   },
 });
 
-defineEmits(['click']);
+defineEmits<{
+  click: [];
+}>();
 
 const button = ref<HTMLButtonElement | null>(null);
 
 const color = ref(3);
 const previousColor = ref(-1);
 
+const buttonColors = ['#56e4a6', '#24d4f3', '#ff89ba', '#85bcf7'] as const;
+
 const randomise = () => {
-  let newColor;
-  do {
+  let newColor = color.value;
+  while (newColor === color.value) {
     newColor = Math.floor(Math.random() * buttonColors.length);
-  } while (newColor === color.value);
+  }
   previousColor.value = color.value;
   color.value = newColor;
 };
 
 const buttonColorStyle = computed(() => ({
-  'background-color': `${buttonColors[color.value]}`,
+  'background-color': buttonColors[color.value],
 }));
 
 onMounted(() => {
   color.value = Math.floor(Math.random() * buttonColors.length);
   previousColor.value = color.value;
 });
-
-const buttonColors = ['#56e4a6', '#24d4f3', '#ff89ba', '#85bcf7'];
 </script>
 
 <style lang="scss" scoped>
-/* @use '../assets/aquabutton.scss'; */
-
 button {
-  /* background-color: #56e4a6; */
-
   color: #fff;
-
   font-weight: 500;
   letter-spacing: -0.025em;
-
   padding: 1.1em 0.8em;
   border-radius: 3em;
-
   justify-content: center;
   margin: auto;
   min-width: 100%;
-
   position: relative;
   pointer-events: auto;
   z-index: 1;
@@ -77,7 +72,6 @@ button {
   }
 
   &:active {
-    /* scale: 0.95; */
     filter: grayscale(10%);
     transition: filter 0.2s ease;
     animation: mochimochi 0.4s ease;
